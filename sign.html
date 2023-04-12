@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Register Page</title>
+	<link rel="stylesheet" href="login/css/style.css">	
+</head>
+
+<body>
+	<header>
+		<h1 class="heading">Signup For</h1>
+	</header>
+
+	<!-- container div -->
+	<div class="container">
+
+		<!-- upper button section to select the login or signup form -->
+		<div class="slider"></div>
+		<div class="btn">
+			<button class="login"> Teacher</button>
+			<button class="signup"> Student</button>
+		</div>
+
+		<!-- Form section that contains the signup form -->
+		<div class="form-section">
+
+			<!--Signup for teacher -->
+			
+			<div class="signup-box">
+				<input type="text" class="name ele" name ="fname" placeholder="First name">
+				<input type="text" class="name ele" name="lname"placeholder="Last name">	
+				<input type="email" class="email ele" name="email"placeholder="youremail@email.com">	
+				<input type="password" class="password ele"name="password" placeholder="password">
+				<span>Gender: <input type="radio" name="gender" name="gender"value="male"> Male
+                <input type="radio" name="gender" name="gender"value="female"> Female </span>
+			    <input type="number" class="name ele" name="mno"placeholder="Mobile No:">
+				<input type="text" class="name ele"name="oname" placeholder="Organisation Name">
+				<input type="text" class="name ele" name="des"placeholder="Designation">
+				<button class="clkbtn">Signup</button>
+			</div>
+
+			<!-- signup for student -->
+
+			<div class="signup-box">
+				<input type="text" class="name ele" placeholder="Enter your name">
+				<input type="email" class="email ele" placeholder="youremail@email.com">
+				<input type="password" class="password ele" placeholder="password">
+				<input type="password" class="password ele" placeholder="Confirm password">
+				<span>Gender: <input type="radio" name="gender" value="male"> Male
+					<input type="radio" name="gender" value="female"> Female </span>
+				<input type="number" class="name ele" placeholder="Mobile No:">
+				<input type="date" class="name ele" placeholder="DOB">
+				<button class="clkbtn">Signup</button>
+			</div>
+		</div>
+	</div>
+	<script src="login/javascript/index.js"></script>
+</body>
+<?php 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the form data
+    $fname = $_POST['fname'];
+	$lname = $_POST['lname'];
+    $email = $_POST['email'];
+	$gender = $_POST['gender'];
+    $password = $_POST['password'];
+	$mobile = $_POST['mno'];
+	$organisation = $_POST['oname'];
+	$Designation=$_POST['des'];
+
+    // Insert the data into the database
+    $sql = "INSERT INTO user1 (fname,lname, email, gender,password,mno,oname,des) VALUES ('$fname','$lname','$email', '$gender','$password','$mobile','$organisation','$Designation')";
+    if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    // Close the database connection
+    $conn->close();
+}
+?>
+
+</html>
